@@ -3,11 +3,11 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 public class GameWindow extends JFrame {
-    public static boolean isUpPress, isDownPress, isLeftPress, isRightPress;
+    public static boolean isUpPress, isDownPress, isLeftPress, isRightPress, shootBullets;
     public GameWindow(){
         this.setVisible(true);
         this.setTitle("Penguin");
-        this.setSize(800, 600);
+        //this.setSize(800, 600);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.setResizable(false);
         this.addKeyListener(new KeyAdapter() {
@@ -25,6 +25,9 @@ public class GameWindow extends JFrame {
                 if (e.getKeyCode() == KeyEvent.VK_D) {
                     isRightPress = true;
                 }
+                if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+                    shootBullets = true;
+                }
             }
 
             @Override
@@ -40,6 +43,9 @@ public class GameWindow extends JFrame {
                 }
                 if (e.getKeyCode() == KeyEvent.VK_D) {
                     isRightPress = false;
+                }
+                if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+                    shootBullets = false;
                 }
             }
         });
