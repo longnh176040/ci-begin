@@ -1,36 +1,41 @@
-import com.sun.imageio.plugins.common.ImageUtil;
-import tklibs.SpriteUtils;
+package Game;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 public class GameCanvas extends JPanel {
     BackGround backGround;
     Player player;
-    PlayerBullet playerBullets;
+    static ArrayList<PlayerBullet> playerBullets;
 
 
     public GameCanvas() {
         //this.setBackground(Color.BLUE);
         this.backGround = new BackGround();
         this.player = new Player();
-        this.playerBullets = new PlayerBullet();
+        this.playerBullets = new ArrayList<>();
     }
 
         @Override
         public void paint (Graphics g){
            g.setColor(Color.WHITE);
            g.fillRect(0, 0, Settings.SCREEN_WIDTH, Settings.SCREEN_HEIGHT);
-           g.drawImage(backGround.image, (int)backGround.position.x, (int) backGround.position.y, null);
-           g.drawImage(player.image, (int) player.position.x, (int) player.position.y, null);
-           g.drawImage(playerBullets.image, (int) playerBullets.position.x, (int) playerBullets.position.y, null);
+           this.backGround.render(g);
+           this.player.render(g);
+           for (int i = 0; i< this.playerBullets.size(); i++) {
+               PlayerBullet bullets = this.playerBullets.get(i);
+               bullets.render(g);
+           }
         }
 
         public void runAll() {
         this.player.run();
         this.backGround.run();
-        this.playerBullets.run();
+        for (int i = 0; i< this.playerBullets.size(); i++) {
+            PlayerBullet bullets = this.playerBullets.get(i);
+            bullets.run();
+        }
 
         }
 

@@ -1,9 +1,11 @@
+package Game;
+
 import javax.swing.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 public class GameWindow extends JFrame {
-    public static boolean isUpPress, isDownPress, isLeftPress, isRightPress, shootBullets;
+    public static boolean isUpPress, isDownPress, isLeftPress, isRightPress, isFirePress;
     public GameWindow(){
         this.setVisible(true);
         this.setTitle("Penguin");
@@ -26,7 +28,7 @@ public class GameWindow extends JFrame {
                     isRightPress = true;
                 }
                 if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-                    shootBullets = true;
+                    isFirePress = true;
                 }
             }
 
@@ -45,7 +47,7 @@ public class GameWindow extends JFrame {
                     isRightPress = false;
                 }
                 if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-                    shootBullets = false;
+                    isFirePress = false;
                 }
             }
         });
