@@ -1,11 +1,12 @@
-package Game;
+package Game.Player;
 
+import Game.GameObject;
 import Game.Renderer.Animation;
 import tklibs.SpriteUtils;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-public class PlayerBullet extends GameObject{
+public class PlayerBullet extends GameObject {
 
 
     public PlayerBullet() {
@@ -26,7 +27,7 @@ public class PlayerBullet extends GameObject{
 
     @Override
     public void run() {
-            this.position.addThis(0, -3);
+            this.position.addThis(0, -1);
 
 
     }

@@ -1,12 +1,16 @@
-package Game;
+package Game.Player;
 
-import Game.Renderer.Animation;
+import Game.GameCanvas;
+import Game.GameObject;
+import Game.GameWindow;
+import Game.Renderer.PlayerRenderer;
+import Game.Settings;
 import tklibs.Mathx;
 import tklibs.SpriteUtils;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-public class Player extends GameObject{
+public class Player extends GameObject {
 
     public Player() {
         super();
@@ -25,16 +29,20 @@ public class Player extends GameObject{
         images.add(SpriteUtils.loadImage("assets/images/players/straight/5.png"));
         images.add(SpriteUtils.loadImage("assets/images/players/straight/6.png"));
 
-        this.renderer = new Animation(images);
+        //this.renderer = new Animation(images);
+        this.renderer = new PlayerRenderer("Player", images);
     }
 
     private void limitPlayerPosition() {
-        float x = (float)Mathx.clamp(this.position.x, 0, Settings.BACKGROUND_WIDTH - Settings.PLAYER_WIDTH); //limit x
-        float y = (float)Mathx.clamp(this.position.y, 0, Settings.SCREEN_HEIGHT - Settings.PLAYER_HEIGHT); //limit y
+        int halfWidth = (int) (Settings.PLAYER_WIDTH * this.anchor.x);
+        int halfHeight = (int) (Settings.PLAYER_HEIGHT * this.anchor.y);
+        float x = (float) Mathx.clamp(this.position.x, halfWidth, Settings.BACKGROUND_WIDTH - halfWidth); //limit x
+        float y = (float) Mathx.clamp(this.position.y, halfHeight, Settings.SCREEN_HEIGHT - halfHeight); //limit y
         this.position.set(x, y);
     }
 
     int count = 0; //TODO: will be fixed
+
     @Override
     public void run() {
         this.move();
@@ -50,7 +58,7 @@ public class Player extends GameObject{
         if (GameWindow.isFirePress) {
             PlayerBullet bullets = new PlayerBullet();
             bullets.position.set(this.position.x, this.position.y);
-            GameCanvas.playerBullets.add(bullets);
+            GameObject.addGameObject(bullets);
             count = 0;
         }
     }

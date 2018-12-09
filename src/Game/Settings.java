@@ -9,5 +9,7 @@ public class Settings {
     public static int PLAYER_START_Y = 300;
     public static int BACKGROUND_WIDTH = 384;
     public static int FPS = 1000/60;
+    public static int ENEMY_BLACK_HEIGHT = 50;
+    public static int ENEMY_BLACK_WIDTH = 34;
 }
 
