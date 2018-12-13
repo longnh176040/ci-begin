@@ -14,6 +14,7 @@ public class PlayerBullet extends GameObject {
 //        this.image = SpriteUtils.loadImage("assets/images/player-bullets/a/1.png");
         //this.position.set(Settings.PLAYER_START_X, Settings.PLAYER_START_Y - this.image.getHeight());
         this.createRenderer();
+        this.velocity.set (0, -3);
     }
 
     private void createRenderer() {
@@ -27,8 +28,6 @@ public class PlayerBullet extends GameObject {
 
     @Override
     public void run() {
-            this.position.addThis(0, -1);
-
-
+        super.run();
     }
 }

@@ -1,21 +1,19 @@
 package Game.Player;
 
-import Game.GameCanvas;
-import Game.GameObject;
-import Game.GameWindow;
+import Game.*;
 import Game.Renderer.PlayerRenderer;
-import Game.Settings;
 import tklibs.Mathx;
 import tklibs.SpriteUtils;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 public class Player extends GameObject {
-
+    FrameCounter fireCounter;
     public Player() {
         super();
         this.position.set(Settings.PLAYER_START_X, Settings.PLAYER_START_Y);
         this.createRenderer();
+        this.fireCounter = new FrameCounter(20);
     }
 
 
@@ -41,13 +39,11 @@ public class Player extends GameObject {
         this.position.set(x, y);
     }
 
-    int count = 0; //TODO: will be fixed
-
     @Override
     public void run() {
+        super.run();
         this.move();
-        count++;
-        if (count > 15) {
+        if (this.fireCounter.run()) {
             this.fire();
         }
         this.limitPlayerPosition();
@@ -59,28 +55,28 @@ public class Player extends GameObject {
             PlayerBullet bullets = new PlayerBullet();
             bullets.position.set(this.position.x, this.position.y);
             GameObject.addGameObject(bullets);
-            count = 0;
+            this.fireCounter.reset();
         }
     }
 
     private void move() {
+        int vx = 0;
+        int vy = 0;
         if (GameWindow.isUpPress) {
-            //this.y--;
-            this.position.addThis(0, -1);
+            vy--;
         }
         if (GameWindow.isDownPress) {
-            //this.y++;
-            this.position.addThis(0, 1);
+            vy++;
         }
 
         if (GameWindow.isLeftPress) {
-            //this.x--;
-            this.position.addThis(-1, 0);
+            vx--;
         }
         if (GameWindow.isRightPress) {
-            //this.x++;
-            this.position.addThis(1, 0);
+            vx++;
         }
+        this.velocity.set(vx, vy);
+        this.velocity.setLength(1);
     }
 
 }

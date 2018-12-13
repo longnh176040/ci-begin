@@ -1,19 +1,23 @@
 package Game;
 
 import Game.Player.Player;
-import Game.Player.PlayerBullet;
+import Game.enemy.Enemy;
+import javafx.scene.layout.Background;
+
 import javax.swing.*;
 import java.awt.*;
 
 public class GameCanvas extends JPanel {
 
     public GameCanvas() {
-        //this.setBackground(Color.BLUE);
-        GameObject.addGameObject(new BackGround());
+        //GameObject.addGameObject(new BackGround());
+        GameObject.createGameObject(BackGround.class);
         //this.player = new Player();
-        GameObject.addGameObject(new Player());
+        //GameObject.addGameObject(new Player());
+        GameObject.createGameObject(Player.class);
         //this.playerBullets = new ArrayList<>();
-        GameObject.addGameObject(new Enemy());
+        //GameObject.addGameObject(new Enemy());
+        GameObject.createGameObject(Enemy.class);
     }
 
     @Override
