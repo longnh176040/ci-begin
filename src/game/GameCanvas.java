@@ -1,8 +1,7 @@
-package Game;
+package game;
 
-import Game.Player.Player;
-import Game.enemy.Enemy;
-import javafx.scene.layout.Background;
+import game.player.Player;
+import game.enemy.Enemy;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,13 +10,13 @@ public class GameCanvas extends JPanel {
 
     public GameCanvas() {
         //GameObject.addGameObject(new BackGround());
-        GameObject.createGameObject(BackGround.class);
-        //this.player = new Player();
-        //GameObject.addGameObject(new Player());
-        GameObject.createGameObject(Player.class);
+        GameObject.recycle(BackGround.class);
+        //this.player = new player();
+        //GameObject.addGameObject(new player());
+        GameObject.recycle(Player.class);
         //this.playerBullets = new ArrayList<>();
         //GameObject.addGameObject(new Enemy());
-        GameObject.createGameObject(Enemy.class);
+        GameObject.recycle(Enemy.class);
     }
 
     @Override

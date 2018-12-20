@@ -1,4 +1,4 @@
-package Game;
+package game;
 
 public class Settings {
     public static int SCREEN_WIDTH = 800;
@@ -11,5 +11,11 @@ public class Settings {
     public static int FPS = 1000/60;
     public static int ENEMY_PINK_HEIGHT = 28;
     public static int ENEMY_PINK_WIDTH = 28;
+    public static int PLAYER_BULLET_WIDTH = 24;
+    public static int PLAYER_BULLET_HEIGHT = 24;
+    public static int ENEMY_BULLET_WIDTH = 16;
+    public static int ENEMY_BULLET_HEIGHT = 16;
+
+
 }
 

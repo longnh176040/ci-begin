@@ -1,7 +1,7 @@
-package Game.Renderer;
+package game.renderer;
 
-import Game.FrameCounter;
-import Game.GameObject;
+import game.FrameCounter;
+import game.GameObject;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;

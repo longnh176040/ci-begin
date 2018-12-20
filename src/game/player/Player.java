@@ -1,7 +1,7 @@
-package Game.Player;
+package game.player;
 
-import Game.*;
-import Game.Renderer.PlayerRenderer;
+import game.*;
+import game.renderer.PlayerRenderer;
 import tklibs.Mathx;
 import tklibs.SpriteUtils;
 import java.awt.image.BufferedImage;
@@ -28,7 +28,7 @@ public class Player extends GameObject {
         images.add(SpriteUtils.loadImage("assets/images/players/straight/6.png"));
 
         //this.renderer = new Animation(images);
-        this.renderer = new PlayerRenderer("Player", images);
+        this.renderer = new PlayerRenderer("player", images);
     }
 
     private void limitPlayerPosition() {
@@ -52,9 +52,8 @@ public class Player extends GameObject {
 
     private void fire() {
         if (GameWindow.isFirePress) {
-            PlayerBullet bullets = new PlayerBullet();
+            PlayerBullet bullets = GameObject.recycle(PlayerBullet.class);
             bullets.position.set(this.position.x, this.position.y);
-            GameObject.addGameObject(bullets);
             this.fireCounter.reset();
         }
     }

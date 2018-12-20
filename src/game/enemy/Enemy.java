@@ -1,19 +1,26 @@
-package Game.enemy;
+package game.enemy;
 
-import Game.GameObject;
-import Game.Renderer.Animation;
-import Game.Settings;
+import game.FrameCounter;
+import game.GameObject;
+import game.physics.BoxCollider;
+import game.physics.Physics;
+import game.renderer.Animation;
+import game.Settings;
 import tklibs.SpriteUtils;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-public class Enemy extends GameObject {
+public class Enemy extends GameObject implements Physics {
+    BoxCollider boxCollider;
+    FrameCounter fireCounter;
 
     public Enemy() {
         super();
         this.position.set(0, -30);
         this.createRenderer();
         this.velocity.set(3, -1);
+        this.boxCollider = new BoxCollider(this.position, this.anchor, Settings.ENEMY_PINK_WIDTH, Settings.ENEMY_PINK_HEIGHT);
+        this.fireCounter = new FrameCounter(20);
     }
 
     public void createRenderer() {
@@ -29,6 +36,13 @@ public class Enemy extends GameObject {
     @Override
     public void run() {
         super.run();
+        this.move();
+        if (this.fireCounter.run()) {
+            this.fire();
+        }
+    }
+
+    public void move() {
         if (this.position.x > Settings.BACKGROUND_WIDTH - Settings.ENEMY_PINK_WIDTH/2 && this.velocity.x > 0) {
             this.velocity.set(-3 , this.velocity.y);
         }
@@ -43,4 +57,14 @@ public class Enemy extends GameObject {
         }
     }
 
+    public void fire() {
+        EnemyBullet bullets = GameObject.recycle(EnemyBullet.class);
+        bullets.position.set(this.position.x, this.position.y);
+        this.fireCounter.reset();
+    }
+
+    @Override
+    public BoxCollider getBoxCollider() {
+        return this.boxCollider;
+    }
 }
